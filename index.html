@@ -54,6 +54,10 @@
         <p class="hero-sub fade-up delay-2">
           World-class bodybuilding coaching, contest prep, and posing instruction from a proven IFBB Pro. No fluff — just real results, personalized for you.
         </p>
+        <!-- Mobile-only image: shown between description & stats on ≤991px -->
+        <div class="hero-img-mobile">
+          <img src="images/2.jpg" alt="Steve Mac IFBB Pro" class="hero-img-inner">
+        </div>
         <div class="hero-stats fade-up delay-2">
           <div>
             <div class="stat-num">500<span>+</span></div>
@@ -454,9 +458,6 @@
       <div class="masonry-item" data-type="image">
         <div class="gallery-item">
           <img src="images/1.jpg" alt="Training session" class="gallery-img">
-          <div class="gallery-overlay">
-            <i class="bi bi-zoom-in"></i>
-          </div>
         </div>
       </div>
       <!-- Video 1 -->
@@ -575,18 +576,18 @@
 <footer>
   <div class="container">
     <div class="row align-items-center gy-3">
-      <div class="col-md-4">
+      <div class="col-12 col-sm-4 text-center text-sm-start">
         <div class="footer-brand">Steve<span> Mac</span> <span style="color:rgba(255,255,255,0.3);font-weight:300;font-size:1rem;">| IFBB Pro</span></div>
       </div>
-      <div class="col-md-4 text-md-center">
-        <ul class="footer-links justify-content-md-center">
+      <div class="col-12 col-sm-4 text-center">
+        <ul class="footer-links justify-content-center">
           <li><a href="#about">About</a></li>
           <li><a href="#results">Results</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#pricing">Pricing</a></li>
         </ul>
       </div>
-      <div class="col-md-4 text-md-end">
+      <div class="col-12 col-sm-4 text-center text-sm-end">
         <p class="footer-copy">© 2026 Steve Mac Coaching. All rights reserved.</p>
       </div>
     </div>
@@ -601,5 +602,35 @@
   <i class="bi bi-whatsapp"></i>
   <span class="whatsapp-tooltip">Chat with us</span>
 </a>
+
+<!-- THANK YOU POPUP -->
+<div class="thankyou-overlay" id="thankyouOverlay">
+  <div class="thankyou-modal">
+    <div class="thankyou-glow"></div>
+    <div class="thankyou-icon">
+      <i class="bi bi-check-lg"></i>
+    </div>
+    <div class="thankyou-tag">Inquiry Received</div>
+    <h3 class="thankyou-title">Thank You,<br><em>Champion!</em></h3>
+    <p class="thankyou-msg">
+      Your message has landed. Steve will personally review your inquiry and get back to you within <strong>24 hours</strong> to discuss your goals.
+    </p>
+    <div class="thankyou-divider"></div>
+    <div class="thankyou-social">
+      <span>While you wait, follow Steve:</span>
+      <div class="thankyou-links">
+        <a href="https://www.instagram.com/stevemactrainer_ifbbpro/" target="_blank" class="ty-link ig">
+          <i class="bi bi-instagram"></i> Instagram
+        </a>
+        <a href="https://wa.me/+917016196839" target="_blank" class="ty-link wa">
+          <i class="bi bi-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+    <button class="thankyou-close" id="thankyouClose">
+      <i class="bi bi-x-lg"></i> Close
+    </button>
+  </div>
+</div>
 </body>
 </html>

@@ -132,6 +132,15 @@ body {
 
 .hero-content { position: relative; z-index: 2; }
 
+.hero-img-mobile {
+  display: none;
+}
+.hero-img-mobile img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -887,55 +896,361 @@ footer {
   visibility: visible;
 }
 
+/* ── THANK YOU POPUP ── */
+.thankyou-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.thankyou-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.thankyou-modal {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 3rem 2.5rem 2.5rem;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+  transform: translateY(30px) scale(0.97);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
+  opacity: 0;
+}
+.thankyou-overlay.active .thankyou-modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Glowing orange circle background decoration */
+.thankyou-glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(255,90,0,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Check icon */
+.thankyou-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, var(--orange), #ff8c40);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.4rem;
+  box-shadow: 0 12px 36px rgba(255,90,0,0.35);
+  animation: ty-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+}
+@keyframes ty-pop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.thankyou-icon i {
+  font-size: 2.2rem;
+  color: var(--white);
+  font-weight: 900;
+}
+
+/* Tag */
+.thankyou-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.6rem;
+}
+
+/* Title */
+.thankyou-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--black);
+  margin-bottom: 1.1rem;
+}
+.thankyou-title em { font-style: normal; color: var(--orange); }
+
+/* Message */
+.thankyou-msg {
+  font-size: 0.96rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+.thankyou-msg strong { color: var(--black); }
+
+/* Divider */
+.thankyou-divider {
+  width: 40px;
+  height: 3px;
+  background: var(--orange);
+  border-radius: 2px;
+  margin: 1.4rem auto;
+}
+
+/* Social row */
+.thankyou-social span {
+  font-size: 0.78rem;
+  color: var(--gray);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.thankyou-links {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.ty-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.6rem 1.3rem;
+  border-radius: 6px;
+  transition: transform 0.15s, opacity 0.2s;
+}
+.ty-link:hover { transform: translateY(-2px); opacity: 0.85; }
+.ty-link.ig { background: #E1306C; color: var(--white); }
+.ty-link.wa { background: #25D366; color: var(--white); }
+
+/* Close button */
+.thankyou-close {
+  margin-top: 1.6rem;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--gray);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0.6rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.thankyou-close:hover { border-color: var(--orange); color: var(--orange); }
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  .thankyou-modal { padding: 2.5rem 1.5rem 2rem; }
+  .thankyou-title { font-size: 2rem; }
+  .thankyou-icon { width: 60px; height: 60px; }
+  .thankyou-icon i { font-size: 1.8rem; }
+}
+
 /* ── RESPONSIVE ── */
+
+/* ── TABLET (≤991px) ── */
 @media (max-width: 991px) {
+
+  /* Hero — stack image BELOW the text using flex order */
+  .hero {
+    min-height: auto;
+    padding: 100px 0 60px;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-bg {
+    background: linear-gradient(180deg, var(--black) 0%, var(--black) 60%, rgba(10,10,10,0.85) 100%);
+  }
+  .hero-content { order: 1; }
   .hero-img {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    width: 80%;
-    max-width: 400px;
-    margin: 2rem auto;
+    display: none;
   }
-  .hero-badge {
-    width: 90px;
-    height: 90px;
-    bottom: -15px;
-    right: -15px;
+  .hero-img-mobile {
+    width: 70%;
+    max-width: 420px;
+    margin: 2.5rem auto 2rem;
+    display: block;
+    z-index: 2;
+    order: 2;
   }
-  .hero-badge .badge-num { font-size: 1.6rem; }
-  .hero-badge .badge-txt { font-size: 0.55rem; }
+  .hero-content { padding-bottom: 0; order: 1; }
+  .hero .col-lg-7 { text-align: center; }
+  .hero-eyebrow { justify-content: center; }
+  .hero-sub { margin-left: auto; margin-right: auto; }
+  .hero-stats { justify-content: center; }
+  .hero .d-flex { justify-content: center; }
+
+  /* About badge — keep inside image bounds */
   .about-badge { right: 0; bottom: 0; }
+
+  /* Pricing — remove offset on featured card */
   .pricing-card.featured { transform: none; }
   .pricing-card.featured:hover { transform: translateY(-6px); }
-}
-@media (max-width: 768px) {
-  #about, #results, #services, #testimonials, #pricing, #cta, #booking, #gallery { padding: 70px 0; }
-  .hero-stats { gap: 1.5rem; }
-  .stat-num { font-size: 1.8rem; }
-  .sticky-apply { bottom: 16px; left: 14px; padding: 0.65rem 1.2rem; font-size: 0.88rem; }
-  .booking-card { padding: 1.5rem; }
-  .btn-submit { padding: 0.85rem 2rem; font-size: 0.9rem; }
-  .gallery-overlay { opacity: 1; background: rgba(255,90,0,0.6); }
-  .gallery-overlay i { font-size: 1.8rem; }
-  .video-badge { width: 50px; height: 50px; }
-  .video-badge i { font-size: 1.5rem; }
-  .masonry-grid { column-count: 2; }
-  #gallery h2 { font-size: 2rem; }
-  .whatsapp-float {
-    width: 50px;
-    height: 50px;
-    bottom: 20px;
-    right: 20px;
+
+  /* Section padding */
+  #about, #results, #services, #testimonials, #pricing, #cta, #booking, #gallery {
+    padding: 80px 0;
   }
+}
+
+/* ── MOBILE LANDSCAPE / SMALL TABLET (≤768px) ── */
+@media (max-width: 768px) {
+
+  /* General section spacing */
+  #about, #results, #services, #testimonials, #pricing, #cta, #booking, #gallery {
+    padding: 64px 0;
+  }
+
+  /* Navbar */
+  .navbar { padding: 0.65rem 0; }
+  .navbar-brand { font-size: 1.35rem; }
+  .navbar-toggler-icon { filter: invert(0); }
+  #navMenu { background: rgba(255,255,255,0.98); border-top: 1px solid var(--border); padding: 0.5rem 0 1rem; }
+  .nav-link { padding: 0.55rem 1.2rem !important; }
+  .nav-cta { margin: 0.4rem 1.2rem; display: inline-block; }
+
+  /* Hero */
+  .hero { padding: 80px 0 50px; }
+  .hero .col-lg-7 { text-align: center; }
+  .hero h1 { font-size: clamp(2.8rem, 12vw, 5rem); }
+  .hero-sub { font-size: 1rem; }
+  .hero-stats { gap: 1.4rem; flex-wrap: wrap; justify-content: center; }
+  .stat-num { font-size: 2rem; }
+  .hero-img-mobile { width: 80%; max-width: 340px; margin-bottom: 2.2rem; }
+  .hero .d-flex { justify-content: center; }
+  .hero-eyebrow { justify-content: center; }
+
+  /* About */
+  #about .col-lg-5 { margin-bottom: 2rem; }
+  .about-img, .about-img-placeholder { max-width: 100%; }
+  .about-badge { width: 90px; height: 90px; right: 0; bottom: -10px; }
+  .about-badge .badge-num { font-size: 1.6rem; }
+  .about-badge .badge-txt { font-size: 0.6rem; }
+
+  /* Results grid — 2 per row on tablet */
+  #results .col-lg-4.col-sm-6 { flex: 0 0 50%; max-width: 50%; }
+
+  /* Services — 2 per row */
+  #services .col-lg-3.col-sm-6 { flex: 0 0 50%; max-width: 50%; }
+
+  /* Testimonials — full width stacked */
+  #testimonials .col-lg-4 { flex: 0 0 100%; max-width: 100%; }
+
+  /* Pricing */
+  #pricing .col-lg-4.col-md-6 { flex: 0 0 100%; max-width: 100%; }
+  .pricing-card { padding: 2rem 1.5rem; }
+  .plan-price { font-size: 2.8rem; }
+
+  /* Booking form */
+  .booking-card { padding: 2rem 1.2rem; }
+  .btn-submit { width: 100%; justify-content: center; padding: 0.9rem 1.5rem; font-size: 0.92rem; }
+
+  /* Gallery */
+  .masonry-grid { column-count: 2; column-gap: 1rem; }
+  .masonry-item { margin-bottom: 1rem; }
+  .gallery-overlay { opacity: 1; background: rgba(255,90,0,0.55); }
+
+  /* CTA section */
+  #cta .d-flex { flex-direction: column; align-items: center; gap: 0.9rem !important; }
+  .btn-whatsapp, .btn-ig, #cta .btn-outline-custom { width: 100%; max-width: 320px; justify-content: center; text-align: center; }
+  .cta-sub { font-size: 1rem; }
+
+  /* Footer */
+  .footer-links { justify-content: center; gap: 1rem; }
+  .footer-copy { text-align: center; margin-top: 0.3rem; }
+
+  /* WhatsApp float */
+  .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
   .whatsapp-float i { font-size: 1.6rem; }
   .whatsapp-tooltip { display: none; }
 }
+
+/* ── MOBILE PORTRAIT (≤576px) ── */
 @media (max-width: 576px) {
-  .masonry-grid { column-count: 1; }
-  #gallery { padding: 70px 0; }
-  #gallery h2 { font-size: 1.75rem; }
-  #gallery p { font-size: 1rem; }
-  .masonry-item { margin-bottom: 1rem; }
+
+  /* Section spacing */
+  #about, #results, #services, #testimonials, #pricing, #cta, #booking, #gallery {
+    padding: 52px 0;
+  }
+
+  /* Hero */
+  .hero { padding: 70px 0 40px; }
+  .hero h1 { font-size: clamp(2.4rem, 14vw, 3.8rem); line-height: 0.95; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-eyebrow { font-size: 0.7rem; letter-spacing: 1.5px; }
+  .hero-stats { gap: 1rem; }
+  .stat-num { font-size: 1.7rem; }
+  .stat-label { font-size: 0.68rem; }
+  .hero-img-mobile { width: 88%; max-width: 300px; margin-bottom: 2rem; }
+  .btn-primary-custom, .btn-outline-custom { width: 100%; text-align: center; display: block; }
+  .hero .d-flex { flex-direction: column; align-items: center; gap: 0.8rem !important; }
+
+  /* Section titles */
+  .section-title { font-size: clamp(2rem, 9vw, 3rem); }
+
+  /* About */
+  .about-img, .about-img-placeholder { max-width: 100%; }
+  .about-badge { width: 80px; height: 80px; }
+  .about-badge .badge-num { font-size: 1.3rem; }
+  .about-badge .badge-txt { font-size: 0.55rem; }
+  #about .btn-primary-custom { display: block; text-align: center; }
+
+  /* Results — single column */
+  #results .col-lg-4.col-sm-6 { flex: 0 0 100%; max-width: 100%; }
+
+  /* Services — single column */
+  #services .col-lg-3.col-sm-6 { flex: 0 0 100%; max-width: 100%; }
+  .service-card { padding: 1.6rem; }
+
+  /* Pricing — single column */
+  .plan-price { font-size: 2.4rem; }
+  .pricing-card.featured { transform: none; }
+
+  /* Gallery */
+  .masonry-grid { column-count: 1; column-gap: 0; }
+  .masonry-item { margin-bottom: 0.8rem; }
+
+  /* Booking */
+  .booking-card { padding: 1.5rem 1rem; border-radius: 8px; }
+  #booking .form-label { font-size: 0.78rem; }
+  #booking .form-control, #booking .form-select { font-size: 0.9rem; padding: 0.65rem 0.9rem; }
+
+  /* CTA */
+  .cta-sub { font-size: 0.95rem; }
+
+  /* Footer */
+  .footer-brand { font-size: 1.2rem; text-align: center; }
+  .footer-links { gap: 0.8rem; }
+  footer { padding: 2rem 0; }
+
+  /* WhatsApp float */
+  .whatsapp-float { width: 46px; height: 46px; bottom: 16px; right: 16px; }
+  .whatsapp-float i { font-size: 1.4rem; }
 }
